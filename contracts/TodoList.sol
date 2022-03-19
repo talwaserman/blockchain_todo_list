@@ -11,6 +11,12 @@ contract TodoList {
 
     mapping(uint => Task) public tasks;
 
+    event TaskCreated(
+        uint id,
+        string content,
+        bool completed
+    );
+
     constructor() public {
         createTask("hello world");
     }
@@ -18,5 +24,7 @@ contract TodoList {
     function createTask(string memory _content) public {
         taskCount ++;
         tasks[taskCount] = Task(taskCount, _content, false);
+        // solidity allow us to broadcast events, and consumers can subscribe to know when event happened.
+        emit TaskCreated(taskCount, _content, false);
     }
 }

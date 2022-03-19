@@ -67,6 +67,18 @@ App = {
 
   },
 
+  createTask: async () => {
+    App.setLoading(true);
+    const content = $("#newTask").val();
+    try {
+      await App.todoList.createTask(content, {from: App.account});
+    } catch(e) {
+      alert('wallet not connected');
+      console.log(e);
+    }
+    window.location.reload();
+  },
+
   setLoading: (boolean) => {
     App.loading = boolean
     const loader = $('#loader')
