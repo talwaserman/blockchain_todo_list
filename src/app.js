@@ -123,6 +123,13 @@ App = {
       // Show the task
       $newTaskTemplate.show()
     }
+  },
+
+  toggleCompleted: async(e) => {
+    App.setLoading(true);
+    const taskId = e.target.name;
+    await App.todoList.toggleCompleted(taskId, {from: App.account});
+    window.location.reload();
   }
 
 }
